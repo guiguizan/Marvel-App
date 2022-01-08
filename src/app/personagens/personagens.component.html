@@ -1,0 +1,12 @@
+
+<div class="body">
+   <div *ngFor="let item of heroisInfo" style="float: left; padding-left: 7%;  margin-top: 10%; ">
+    
+    <div class="container" >
+        <img src="{{item.path}}.jpg" alt="" style="border-radius: 10%;" />
+        <p class="title"> {{item.name}} </p>
+        <div class="overlay"></div>
+        <div class="button"><a > {{item.nomeSerie}}  </a></div>
+      </div>
+  </div>
+</div>

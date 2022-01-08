@@ -1,0 +1,11 @@
+body{
+    background-color: rgb(41, 41, 41);
+}
+
+.center {
+    margin-top: 5%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+  }
