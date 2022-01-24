@@ -21,11 +21,16 @@ export class PersonagensService extends ResourceService{
   hash: any;
 
  
-  getPersonagens(): Observable<any> {
+  getPersonagens(consulta: String): Observable<any> {
+    console.log(consulta)
     this.timestamp = Number(new Date());
     const md5 = new Md5();
     this.hash = md5.appendStr(this.timestamp + this.privateKey + this.publicKey).end();
-    this.marvelURL = 'https://gateway.marvel.com/v1/public/characters?ts=' + this.timestamp + '&apikey=' + this.publicKey + '&hash=' + this.hash;
+    if(consulta == ''){
+      this.marvelURL = 'https://gateway.marvel.com/v1/public/characters?ts=' + this.timestamp + '&apikey=' + this.publicKey + '&hash=' + this.hash;
+    }else{
+      this.marvelURL = 'https://gateway.marvel.com/v1/public/characters?ts=' + this.timestamp + '&apikey=' + this.publicKey + '&hash=' + this.hash + '&name=' + consulta;
+    }
     return this.http.get(this.marvelURL)
       .pipe(
         map((response) => {

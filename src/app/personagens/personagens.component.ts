@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Hero, ListaHeroisResponse,  thumbModel } from '../models/heroi.model';
 import { PersonagensService } from '../services/peronsagens.service';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-personagens',
@@ -8,7 +9,7 @@ import { PersonagensService } from '../services/peronsagens.service';
   styleUrls: ['./personagens.component.css'],
   providers:[
     PersonagensService,
-    
+    FormsModule
   ]
 })
 export class PersonagensComponent implements OnInit {
@@ -18,16 +19,22 @@ export class PersonagensComponent implements OnInit {
   hero: Hero = new Hero();
   herois: ListaHeroisResponse[] = [];
   heroisInfo = [this.hero];
+  search: string= '';
 
 
   ngOnInit(): void {
-    this.carregaPersonagens();
+    this.carregaPersonagens('');
+    
   }
 
-  
-  carregaPersonagens() {
+  buscar(){
+    this.heroisInfo =[];
+    this.carregaPersonagens(this.search);
+  }
+
+  carregaPersonagens(consulta: String) {
     this.cont = 0;
-    this.PersonagensService.getPersonagens().subscribe(
+    this.PersonagensService.getPersonagens(consulta).subscribe(
       (result: any) => {
         console.log(result);
         this.herois = result.data.results;
